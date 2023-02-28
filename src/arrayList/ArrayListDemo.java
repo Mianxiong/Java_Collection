@@ -30,6 +30,8 @@ public class ArrayListDemo {
         c.add(1);
         c.add(2);
         c.add(3);
+        c.add(3);
+        c.add(3);
 
         List<Integer> integerList2 = new ArrayList<>(c);
         System.out.println("integerList2" + integerList2);
@@ -53,6 +55,11 @@ public class ArrayListDemo {
         System.out.println("contains abc: " + integerList2.contains("abc"));
         System.out.println("contains 100: " + integerList2.contains(100));
 
-
+        System.out.println("1 indexOf: " + integerList2.indexOf(1));
+        System.out.println("3 indexOf: " + integerList2.indexOf(3));
+        System.out.println("100 indexOf: " + integerList2.indexOf(100));
+        System.out.println("1000 indexOf: " + integerList2.indexOf(1000));
+        System.out.println("3 lastIndexOf: " + integerList2.lastIndexOf(3));
+        System.out.println("10000 lastIndexOf: " + integerList2.lastIndexOf(10000));
     }
 }
