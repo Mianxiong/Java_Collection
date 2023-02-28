@@ -3,6 +3,7 @@ package arrayList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class ArrayListDemo {
     class User{
@@ -61,5 +62,19 @@ public class ArrayListDemo {
         System.out.println("1000 indexOf: " + integerList2.indexOf(1000));
         System.out.println("3 lastIndexOf: " + integerList2.lastIndexOf(3));
         System.out.println("10000 lastIndexOf: " + integerList2.lastIndexOf(10000));
+
+        //toArray方法
+        Object[] arrays = integerList2.toArray();
+        for(Object array: arrays) {
+            int number = (int) array;
+            System.out.println(number);
+        }
+
+        Integer[] ints = integerList2.toArray(new Integer[0]);
+        for(int number: ints) {
+            System.out.println("int number: "+ number);
+        }
+        System.out.println("length: " + ints.length);
+
     }
 }
