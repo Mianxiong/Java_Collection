@@ -41,6 +41,18 @@ public class ArrayListDemo {
         }
         System.out.println("integerList3" + integerList2);
 
+        //size/isEmpty/contains
+        System.out.println("Size: " + integerList2.size());
+        integerList2.add(100);
+        System.out.println("Size: " + integerList2.size());
+        System.out.println("Is Empty: " + integerList2.isEmpty());
+
+        if(!integerList2.isEmpty()) {
+            System.out.println("The list is not Empty");
+        }
+        System.out.println("contains abc: " + integerList2.contains("abc"));
+        System.out.println("contains 100: " + integerList2.contains(100));
+
 
     }
 }
