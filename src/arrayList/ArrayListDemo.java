@@ -76,5 +76,49 @@ public class ArrayListDemo {
         }
         System.out.println("length: " + ints.length);
 
+        //get/add/remove/set
+
+        //get - array[index]
+        System.out.println("Element in index: 0 " + integerList2.get(0));
+
+        for(Integer num: integerList2) {
+            System.out.println("num: " + num);
+        }
+        for(int i=0; i<integerList2.size();i++) {
+            System.out.println("num: " + integerList2.get(i));
+        }
+        //set(index,value) - array[index] = value
+        integerList2.set(1,10);
+        System.out.println("Element in index: 1 " + integerList2.get(1));
+
+        integerList2.forEach(System.out::println);
+
+        // add
+        integerList2.add(5);//加到最后
+        System.out.println("Element in index 6 : " + integerList2.get(6));
+        System.out.println("Size: "+ integerList2.size());
+
+        integerList2.add(2,10000);//加到index位置，其他后面的元素往右移
+        System.out.println("Size: " + integerList2.size());
+
+        for(int i=0;i<integerList2.size();i++) {
+            System.out.println("Number: " + integerList2.get(i));
+        }
+
+        int toRemoved = integerList2.remove(2);
+        System.out.println("toRemoved: " + toRemoved);
+        boolean isSuccess = integerList2.remove(new Integer(3));
+        System.out.println(isSuccess);
+        for(int i=0;i<integerList2.size();i++) {
+            System.out.println("Number: " + integerList2.get(i));
+        }
+
+        //clear
+        System.out.println("Size: " + integerList2.size());
+        integerList2.clear();
+        System.out.println("Size: " + integerList2.size());
+
+
+
     }
 }
