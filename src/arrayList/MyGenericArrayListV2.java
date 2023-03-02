@@ -1,12 +1,12 @@
 package arrayList;
 
-public class MyGenericArrayList {
+public class MyGenericArrayListV2<T> {
     private final static int DEFAULT_CAPACITY = 10;
     // 属性 field
     /**
      * The data storage of array list.
      */
-    private Object[] elementData;
+    private T[] elementData;
 
     /**
      * The size of array list.
@@ -18,21 +18,21 @@ public class MyGenericArrayList {
     private int capacity;
 
     //构造器 constructor
-    public MyGenericArrayList() {
-        this.elementData = new Object[DEFAULT_CAPACITY];
+    public MyGenericArrayListV2() {
+//        this.elementData = new Object[DEFAULT_CAPACITY];
         this.capacity = DEFAULT_CAPACITY;
         this.size = 0;
     }
 
-    public MyGenericArrayList(int capacity) {
+    public MyGenericArrayListV2(int capacity) {
         if(capacity < 0) {
             throw new RuntimeException("Capacity must be positive");
         } else if(capacity < DEFAULT_CAPACITY) {
-            this.elementData = new Object[DEFAULT_CAPACITY];
+//            this.elementData = new Object[DEFAULT_CAPACITY];
             this.capacity = DEFAULT_CAPACITY;
             this.size = 0;
         } else {
-            this.elementData = new Object[capacity];
+//            this.elementData = new Object[capacity];
             this.capacity = capacity;
             this.size = 0;
         }
@@ -49,10 +49,10 @@ public class MyGenericArrayList {
     public boolean isEmpty() {
         return size == 0;
     }
-    public boolean contains(Object element) {
+    public boolean contains(T element) {
         return indexOf(element) >= 0;
     }
-    public int indexOf(Object element) {
+    public int indexOf(T element) {
         for(int i=0;i< elementData.length;i++) {
             if(elementData[i].equals(element)) {
                 return i;
@@ -64,10 +64,10 @@ public class MyGenericArrayList {
      *
      * @param element
      */
-    public void add(Object element) {
+    public void add(T element) {
         add(size,element);
     }
-    public void add(int index, Object element) {
+    public void add(int index, T element) {
         System.out.println("index: " + index);
         if (index < 0 || index > size) {
             throw new RuntimeException(
@@ -96,7 +96,7 @@ public class MyGenericArrayList {
         }
 
         // 3.elementData point to new array
-        elementData = newElementData;
+        elementData = (T[])newElementData;
 
         // 4.update capacity
         this.capacity = newCapacity;
@@ -107,11 +107,11 @@ public class MyGenericArrayList {
      * @param index
      * @return
      */
-    public Object remove(int index) {
+    public T remove(int index) {
         //0. index range check
         rangeCheck(index);
         //1. Get old value by index.
-        Object oldValue = elementData[index];
+        T oldValue = elementData[index];
 
         //2. copy and shift
         int numToMoved = size - index - 1;
@@ -120,11 +120,11 @@ public class MyGenericArrayList {
 
         }
         //3. update size and clear
-        elementData[--size] = 0;
+        elementData[--size] = null;
         return oldValue;
     }
 
-    public boolean removeByValue(Object element) {
+    public boolean removeByValue(T element) {
         //遍历找到element，然后再删除移动
         for (int i=0; i<size; i++) {
             if (elementData[i].equals(element)) {
@@ -132,7 +132,7 @@ public class MyGenericArrayList {
                 if(numToMoved > 0) {
                     System.arraycopy(elementData,i + 1, elementData, i, numToMoved);
                 }
-                elementData[--size] = 0;
+                elementData[--size] = null;
                 return true;
             }
         }
@@ -150,7 +150,7 @@ public class MyGenericArrayList {
         }
     }
 
-    public Object set(int index,Object element) {
+    public Object set(int index,T element) {
         rangeCheck(index);
         Object oldValue = elementData[index];
         elementData[index] = element;
@@ -159,21 +159,15 @@ public class MyGenericArrayList {
 
 
     public static void main(String[] args) {
-        MyGenericArrayList list = new MyGenericArrayList();
-        list.add(1);
-        list.add(3);
-        list.add(5);
-
-        MyGenericArrayList stringList = new MyGenericArrayList();
-        stringList.add("abd");
+        MyGenericArrayListV2<String> stringList = new MyGenericArrayListV2<>();
         stringList.add("abc");
-        stringList.add("zzz");
-
-        MyGenericArrayList list2 = new MyGenericArrayList();
-        list2.add(1);
-        list2.add("abc");
-        list2.add('b');
-
+//        stringList.add(1);
+        MyGenericArrayListV2<Customer> customerList = new MyGenericArrayListV2<>();
+        customerList.add(new Customer());
+//        customerList.add(123);
     }
-
+}
+class Customer{
+    String customerId;
+    String name;
 }
