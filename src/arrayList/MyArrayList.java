@@ -1,15 +1,19 @@
 package arrayList;
 
+import java.util.AbstractList;
+import java.util.List;
+
 /**
- * The array list for int number
+ * The generic array list
  */
-public class MyArrayList {
+@SuppressWarnings("unchecked")
+public class MyArrayList<E> extends AbstractList<E> implements List<E> {
     private final static int DEFAULT_CAPACITY = 10;
     // 属性 field
     /**
      * The data storage of array list.
      */
-    private int[] elementData;
+    private Object[] elementData;
 
     /**
      * The size of array list.
@@ -22,7 +26,7 @@ public class MyArrayList {
 
     //构造器 constructor
     public MyArrayList() {
-        this.elementData = new int[DEFAULT_CAPACITY];
+        this.elementData = new Object[DEFAULT_CAPACITY];
         this.capacity = DEFAULT_CAPACITY;
         this.size = 0;
     }
@@ -31,11 +35,11 @@ public class MyArrayList {
         if(capacity < 0) {
             throw new RuntimeException("Capacity must be positive");
         } else if(capacity < DEFAULT_CAPACITY) {
-            this.elementData = new int[DEFAULT_CAPACITY];
+            this.elementData = new Object[DEFAULT_CAPACITY];
             this.capacity = DEFAULT_CAPACITY;
             this.size = 0;
         } else {
-            this.elementData = new int[capacity];
+            this.elementData = new Object[capacity];
             this.capacity = capacity;
             this.size = 0;
         }
@@ -52,12 +56,12 @@ public class MyArrayList {
     public boolean isEmpty() {
         return size == 0;
     }
-    public boolean contains(int element) {
+    public boolean contains(Object element) {
         return indexOf(element) >= 0;
     }
-    public int indexOf(int element) {
+    public int indexOf(Object element) {
         for(int i=0;i< elementData.length;i++) {
-            if(elementData[i] == element) {
+            if(elementData[i].equals(element)) {
                 return i;
             }
         }
@@ -67,10 +71,11 @@ public class MyArrayList {
      *
      * @param element
      */
-    public void add(int element) {
-        add(size,element);
+    public boolean add(E element) {
+        add(size(),element);
+        return true;
     }
-    public void add(int index, int element) {
+    public void add(int index, E element) {
         System.out.println("index: " + index);
         if (index < 0 || index > size) {
             throw new RuntimeException(
@@ -90,7 +95,7 @@ public class MyArrayList {
 
     private void resize(int newCapacity) {
         // 1.Create new array
-        int[] newElementData = new int[newCapacity];
+        Object[] newElementData = new Object[newCapacity];
 
         // 2.Copy data from element data array to new element data array
 //        System.arraycopy(elementData, 0, newElementData, 0, elementData.length);
@@ -110,11 +115,11 @@ public class MyArrayList {
      * @param index
      * @return
      */
-    public int remove(int index) {
+    public E remove(int index) {
         //0. index range check
         rangeCheck(index);
         //1. Get old value by index.
-        int oldValue = elementData[index];
+        E oldValue = (E) elementData[index];
 
         //2. copy and shift
         int numToMoved = size - index - 1;
@@ -127,10 +132,10 @@ public class MyArrayList {
         return oldValue;
     }
 
-    public boolean removeByValue(int element) {
+    public boolean remove(Object element) {
         //遍历找到element，然后再删除移动
         for (int i=0; i<size; i++) {
-            if (elementData[i] == element) {
+            if (elementData[i].equals(element) ) {
                 int numToMoved = size - i - 1;
                 if(numToMoved > 0) {
                     System.arraycopy(elementData,i + 1, elementData, i, numToMoved);
@@ -141,9 +146,9 @@ public class MyArrayList {
         }
         return false;
     }
-    public int get(int index) {
+    public E get(int index) {
         rangeCheck(index);
-        return elementData[index];
+        return (E) elementData[index];
     }
 
     private void rangeCheck(int index) {
@@ -153,43 +158,44 @@ public class MyArrayList {
         }
     }
 
-    public int set(int index,int element) {
+    public E set(int index,E element) {
         rangeCheck(index);
-        int oldValue = elementData[index];
+        E oldValue = (E) elementData[index];
         elementData[index] = element;
         return oldValue;
     }
 
 
     public static void main(String[] args) {
-        MyArrayList list1 = new MyArrayList();
+        MyArrayList<Integer> list1 = new MyArrayList<>();
         System.out.println("The size of list1: " + list1.size());
         System.out.println("empty of list 1: " + list1.isEmpty());
 //        list1.add(20,10);
         for(int i=10; i<30; i++) {
             list1.add(i);
-            System.out.println("The size of list 1: " + list1.size());
         }
         list1.add(1,100);
-        for(int number: list1.elementData) {
-            System.out.println("Element: " + number);
-        }
+
         System.out.println("The size of list 1: " + list1.size());
+        System.out.println("contains 100: " + list1.contains(100));
         System.out.println("Number to remove: " + list1.remove(1));
-        list1.removeByValue(12);
-        for(int number: list1.elementData) {
-            System.out.println("Element: " + number);
-        }
+        list1.remove(12);
+
         System.out.println("The size of list 1: " + list1.size());
 
-        System.out.println("contains 100: " + list1.contains(100));
+
         System.out.println("Element of index 5: " + list1.get(5));
         int oldValue = list1.set(5,150);
         System.out.println("Old value of index 5: " + oldValue);
         System.out.println("Current value of index 5: " + list1.get(5));
 
 
-        MyArrayList list2 = new MyArrayList(20);
+        MyArrayList<String> list2 = new MyArrayList<>(20);
+//        list2.add(3);
+        list2.add("abc");
+        list2.add("hello world");
+        System.out.println("size of list 2: "+ list2.size());
+        System.out.println("Element of index 1: " + list2.get(1));
     }
 
 
