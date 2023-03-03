@@ -41,7 +41,7 @@ public class Container<T> {
 
     //下界通配符 ? super T: List<? super Fruit> list表示list中持有Fruit以及Fruit父类的对象
     public static void processWithSuper(List<? super Fruit> list) {
-        //不确定list里面具体是什么类型，所以不能进行写操作,有可能是Apple，有可能是Banana，也有可能是Fruit
+        //有可能是Apple，有可能是Banana，也有可能是Fruit
         list.add(new Apple());
 //        Fruit fruit = new Apple();
 //        list.add(fruit);
