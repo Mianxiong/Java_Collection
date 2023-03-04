@@ -79,5 +79,16 @@ public class HashMapDemo {
 
         System.out.println("The result of value 0.111111: " + map.containsValue(0.111111));// false
         System.out.println("The result of value 2.5: " + map.containsValue(2.5));// true
+
+        // remove
+        Double valueToRemove = map.remove("a"); // 0.1
+        System.out.println("value to remove for key a: " + valueToRemove);
+
+        valueToRemove = map.remove("method"); // null
+        System.out.println("value to remove for key method: " + valueToRemove);
+
+        // "abc" -> 2.5
+        boolean isSuccess = map.remove("abc", 100.01);
+        System.out.println("Flag isSuccess: " + isSuccess);
     }
 }
