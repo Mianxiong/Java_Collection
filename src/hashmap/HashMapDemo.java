@@ -51,5 +51,33 @@ public class HashMapDemo {
         System.out.println("The value of key e: " + map.get("e"));
         System.out.println("The value of key a: " + map.get("a"));
 
+        // 1.get方法： （1）对于传入的key，存在value，返回这个value
+        //（2）对于传入的key， 不存在对应的键值对，返回空
+        Double valueOfABC = map.get("abc");
+        System.out.println("The value of key abc: " + valueOfABC);
+
+        Double valueOfJava = map.get("java");
+        System.out.println("The value of key java: " + valueOfJava);
+
+        // 特例
+        map.put("nihao", null);
+        System.out.println("The value of key nihao: " + map.get("nihao"));
+
+        // 2.getOrDefault
+        Double valueOfMethodGetOrDefault = map.getOrDefault("a", 10.05);
+        System.out.println("The value of getOrDefault for key a: " + valueOfMethodGetOrDefault);// 0.1
+
+        valueOfMethodGetOrDefault = map.getOrDefault("method", 0.33333);
+        System.out.println("The value of getOrDefault for key method: " + valueOfMethodGetOrDefault);// 0.33333
+
+        valueOfMethodGetOrDefault = map.getOrDefault("nihao", 0.33333);
+        System.out.println("The value of getOrDefault for key nihao: " + valueOfMethodGetOrDefault);// null
+
+        // containsKey/ containsValue
+        System.out.println("The result of a: " + map.containsKey("a"));// true
+        System.out.println("The result of method: " + map.containsKey("method"));// false
+
+        System.out.println("The result of value 0.111111: " + map.containsValue(0.111111));// false
+        System.out.println("The result of value 2.5: " + map.containsValue(2.5));// true
     }
 }
