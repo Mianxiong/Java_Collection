@@ -20,6 +20,9 @@ public class Student implements Comparable<Student>{
                 '}';
     }
 
+    public int getScore() {
+        return score;
+    }
 
     @Override
     public int compareTo(Student o) {
