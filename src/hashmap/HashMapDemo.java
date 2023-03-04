@@ -1,7 +1,6 @@
 package hashmap;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class HashMapDemo {
     public static void main(String[] args) {
@@ -89,6 +88,43 @@ public class HashMapDemo {
 
         // "abc" -> 2.5
         boolean isSuccess = map.remove("abc", 100.01);
-        System.out.println("Flag isSuccess: " + isSuccess);
+        System.out.println("Flag isSuccess: " + isSuccess);// false
+
+        //  replace -> 代替put做更新操作 只用于更新，如果key不存在，返回null
+        oldValue = map.replace("a", 0.55); //
+        System.out.println("The old value before replacing for key a: " + oldValue);// null
+        System.out.println("The current value for key a: " + map.get("a"));// null
+
+        oldValue = map.replace("e", 0.55);
+        System.out.println("The old value before replacing for key e: " + oldValue);//100.13
+        System.out.println("The current value for key a: " + map.get("e"));// 0.55
+
+        // keySet/values/entrySet
+        Set<String> keys = map.keySet();
+        // 遍历所有的key
+        for(String key: keys) {
+            System.out.println("The key in map: " + key);
+        }
+
+        Collection<Double> values = map.values();
+
+        // 遍历所有的value
+        for(Double value: values) {
+            System.out.println("The value in map: " + value);
+        }
+
+        Set<Map.Entry<String, Double>> entries = map.entrySet();
+
+        // 遍历所有的entry
+        for(Map.Entry<String, Double> entry: entries) {
+            String key = entry.getKey();
+            Double value = entry.getValue();
+            System.out.println("The entry in map: " + key + " value: " + value );
+        }
+
+
+
+
+
     }
 }
